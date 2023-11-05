@@ -9,7 +9,7 @@ export default function Register () {
         evt.preventDefault();
     }
     return (
-        <section className="register">
+        <main className="register">
             <div className="register__wrapper">
                 <Link to="/" className="register__home">
                     <img
@@ -34,6 +34,6 @@ export default function Register () {
                 </Form>
                 <p className="register__caption">Уже зарегистрированы? <Link to="/signin" className="register__signin">Войти</Link></p>
             </div>
-        </section>
+        </main>
     )
 }

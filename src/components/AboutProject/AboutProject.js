@@ -16,9 +16,9 @@ export default function AboutProject() {
                     </li>
                 </ul>
                 <div className="project__timebar">
-                    <div className="project_timecell_week1">1 неделя</div>
+                    <span className="project__timecell project__timecell_week1">1 неделя</span>
                     <span className="project__stagename backend">Back-end</span>
-                    <div className="project_timecell_week4">4 недели</div>
+                    <span className="project__timecell project__timecell_week4">4 недели</span>
                     <span className="project__stagename frontend">Front-end</span>
                 </div>
             </div>

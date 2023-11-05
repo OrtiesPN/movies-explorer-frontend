@@ -1,4 +1,9 @@
 .input {
+    display: flex;
+    width: 100%;
+}
+
+.input__field {
     padding: 0;
     border: none;
     background-color: inherit;
@@ -6,7 +11,18 @@
 
 /* Стили инпутов на страницах логина и регистрации */
 
-.input_type_logreg {
+.input_logreg {
+    position: relative;
+    flex-direction: column;
+    gap: 5px;
+    color: #A0A0A0;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.input__field_logreg {
     padding-bottom: 10px;
     text-align: start;
     color: #000;
@@ -17,31 +33,28 @@
     border-bottom: 1px solid #E8E8E8;
 }
 
-.input_type_logreg:focus {
+.input__field_logreg:focus {
     outline: 0;
     border-bottom: 1px solid #3456F3;
 }
 
-.input_type_logreg_error {
+.input__field_logreg_error {
     color: #EE3465;
-}
-
-.input__label_logreg {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 100%;
-    color: #A0A0A0;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
 }
 
 /* Стили инпутов на странице редактирования профиля */
 
-.input_type_profile {
+.input_profile {
+    justify-content: space-between;
+    color: #000;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    
+}
+
+.input__field_profile {
     color: #000;
     font-size: 11px;
     font-style: normal;
@@ -50,24 +63,12 @@
     line-height: 14px;
 }
 
-.input_type_profile:disabled {
+.input__field_profile:disabled {
     color: #000;
 }
 
-.input_type_profile:focus {
+.input__field_profile:focus {
     outline: 0;
-}
-
-.input__label_profile {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    color: #000;
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    
 }
 
 /* Стили для ошибок */

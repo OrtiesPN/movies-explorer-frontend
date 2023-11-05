@@ -9,7 +9,7 @@ export default function Login () {
         evt.preventDefault();
     }
     return (
-        <section className="login">
+        <main className="login">
             <div className="login__wrapper">
                 <Link to="/" className="login__home">
                     <img
@@ -26,13 +26,13 @@ export default function Login () {
                     isValid={"true"}
                     onSubmit={handleSubmit}
                 >
-                    <fieldset className="register__fieldset">
+                    <fieldset className="login__fieldset">
                         <Input inputType={"logreg"} values={""} inputLabel={"email"} isInputValid={true}/>
                         <Input inputType={"logreg"} values={""} inputLabel={"password"} isInputValid={true}/>
                     </fieldset>
                 </Form>
                 <p className="login__caption">Ещё не зарегистрированы? <Link to="/signup" className="login__signup">Регистрация</Link></p>
             </div>
-        </section>
+        </main>
     )
 }

@@ -1,4 +1,4 @@
-.burger__button {
+.burger {
     margin: 0;
     padding: 0;
     border: none;
@@ -16,8 +16,13 @@
     transition: opacity 0.4s ease;
 }
 
-.burger__button:hover {
+.burger:hover {
     opacity: 0.8;
+}
+
+.burger_clicked {
+    position: fixed;
+    right: 30px;
 }
 
 .burger__bar {
@@ -60,10 +65,14 @@
 }
 
 @media screen and (max-width: 320px) {
-    .burger__button {
+    .burger {
         width: 40px;
         height: 43px;
         padding: 5px 9px;
+    }
+
+    .burger_clicked {
+        right: 14px;
     }
 
     .burger__bar_clicked:nth-child(1) {

@@ -91,30 +91,6 @@
     line-height: 16px;
 }
 
-.button_type_header-user {
-    width: 100px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    background: none;
-    border-radius: 50px;
-    border: 2px solid rgba(0 , 0, 0, .1);
-}
-
-.button__logo_user {
-    margin-right: 7px;
-    width: 12px;
-    height: 14px;
-    flex-shrink: 0;
-}
-
-
-
 @media screen and (max-width: 440px) {
     .button_type_logreg {
         font-size: 12px;
@@ -134,5 +110,9 @@
 
     .button_type_signout{
         font-size: 12px;
+    }
+    
+    .button_type_more {
+        width: 240px;
     }
 }

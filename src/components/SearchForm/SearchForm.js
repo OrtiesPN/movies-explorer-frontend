@@ -17,21 +17,22 @@ export default function SearchForm() {
         <form className="search">
             <div className="search__form-container">
                 <label className="search__label">
-                    <div className="search__input-icon">
+                    <span className="search__input-icon">
                         <input
-                            className="search__input"
+                            className="search__input "
                             type="search"
                             name="all-movie"
                             placeholder="Фильм"
                         >
                         </input>
-                    </div>
+                    </span>
                 </label>
                 <div className="search__button-block">
                     <button
                         className="search__go"
                         type="submit"
                         onClick={handleSearch}
+                        aria-label="Поиск"
                     >
                     </button>
                     
@@ -41,6 +42,7 @@ export default function SearchForm() {
                             className={`search__thumb search__thumb${searchShort? "_active" : "_inactive"}`}
                             type="button"
                             onClick={handleShort}
+                            aria-label="Искать короткометражки"
                         >
                         </button>
                         <span className="search__option">Короткометражки</span>

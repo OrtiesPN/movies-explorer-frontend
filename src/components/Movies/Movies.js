@@ -8,13 +8,13 @@ import Button from "../Button/Button";
 
 export default function Movies() {
     return (
-        <section className="movies">
+        <main className="movies">
             <SearchForm />
             <MoviesCardList movies={demoMovies} savedMoviesSection={false}/>  
             <div className="movies__more">
                 <Button buttonType="more" titleButton="Ещё" />
             </div>
-        </section>
+        </main>
     )
 }
 

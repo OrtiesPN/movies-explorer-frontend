@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import "./Navigation.css";
+import userLogo from "../../images/icon__COLOR_icon-main.svg"
 import Button from "../Button/Button";
 import BurgerButton from '../BurgerButton/BurgerButton';
 
@@ -29,9 +30,9 @@ export default function Navigation({ isLoggedIn, isBurgerClicked, onClickBurger,
             ) : isMobile ? (
                 <>
                     <BurgerButton isBurgerClicked={isBurgerClicked} onClickBurger={onClickBurger} />
-                    <nav className={`navigation navigation_type_mobile navigation_type_mobile${isBurgerClicked? "_visible" : "" }`} onClick={onClickBurger}>
-                        <ul className="navigation__list navigation__list_user_mobile" onClick={(evt=> evt.stopPropagation())}>
-                        <li className="navigation__item_mobile">
+                    <nav className={`navigation  ${isBurgerClicked? "navigation_type_mobile navigation_type_mobile_visible" : "navigation_type_mobile" }`} onClick={onClickBurger}>
+                        <ul className="navigation__list navigation__list_user-mobile" onClick={(evt=> evt.stopPropagation())}>
+                        <li className="navigation__item-mobile">
                                 <NavLink
                                     to="/"
                                     className={({ isActive }) => isActive ? `navigation__link navigation__link_mobile ${activeLink}` : "navigation__link navigation__link_mobile"}
@@ -40,7 +41,7 @@ export default function Navigation({ isLoggedIn, isBurgerClicked, onClickBurger,
                                     Главная
                                 </NavLink>
                             </li>
-                            <li className="navigation__item_mobile">
+                            <li className="navigation__item-mobile">
                                 <NavLink
                                     to="/movies"
                                     className={({ isActive }) => isActive ? `navigation__link navigation__link_mobile ${activeLink}` : "navigation__link navigation__link_mobile"}
@@ -49,7 +50,7 @@ export default function Navigation({ isLoggedIn, isBurgerClicked, onClickBurger,
                                     Фильмы
                                 </NavLink>
                             </li>
-                            <li className="navigation__item_mobile">
+                            <li className="navigation__item-mobile">
                                 <NavLink
                                 to="/saved-movies"
                                 className={({ isActive }) => isActive ? `navigation__link navigation__link_mobile ${activeLink}` : "navigation__link navigation__link_mobile"}
@@ -58,13 +59,14 @@ export default function Navigation({ isLoggedIn, isBurgerClicked, onClickBurger,
                                     Сохраненные фильмы
                                 </NavLink>
                             </li>
-                            <li className="navigation__item_mobile">
+                            <li className="navigation__item-mobile">
                                 <NavLink
-                                to="/profile"
-                                className="navigation__link"
-                                onClick={onClickBurger}
+                                    to="/profile"
+                                    className="navigation__link navigation__link_profile"
+                                    onClick={onClickBurger}
                                 >
-                                    <Button buttonType="accountHeader" /> 
+                                    <img src={userLogo} alt="User" className="navigation__user-logo"/>
+                                    Аккаунт
                                 </NavLink>
                             </li>
                         </ul>
@@ -72,7 +74,7 @@ export default function Navigation({ isLoggedIn, isBurgerClicked, onClickBurger,
                 </>
                 ) : (
                     <nav className="navigation">
-                        <ul className="navigation__list navigation__list_user_desktop">
+                        <ul className="navigation__list navigation__list_user-desktop">
                             <li className="navigation__item navigation__item_logged">
                                 <NavLink to="/movies" className={({ isActive }) => isActive ? `navigation__link navigation__link_logged ${activeLink}` : "navigation__link navigation__link_logged"}>
                                     Фильмы
@@ -84,8 +86,13 @@ export default function Navigation({ isLoggedIn, isBurgerClicked, onClickBurger,
                                 </NavLink>
                             </li>
                             <li className="navigation__item navigation__item_logged">
-                                <NavLink to="/profile" className="navigation__link" >
-                                    <Button buttonType="accountHeader" /> 
+                                <NavLink
+                                    to="/profile"
+                                    className="navigation__link navigation__link_profile"
+                                    onClick={onClickBurger}
+                                >
+                                    <img src={userLogo} alt="User" className="navigation__user-logo"/>
+                                    Аккаунт
                                 </NavLink>
                             </li>
                         </ul>

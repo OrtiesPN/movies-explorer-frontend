@@ -1,5 +1,6 @@
 .techs {
     padding: 100px 70px;
+    background: #F5F5F5;
 }
 
 .techs__title {
@@ -94,6 +95,7 @@
 @media screen and (max-width: 440px) {
     .techs {
         padding: 69px 18px 70px;
+        background: inherit;
     }
 
     .techs__title {

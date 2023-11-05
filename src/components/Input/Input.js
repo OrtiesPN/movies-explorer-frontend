@@ -3,13 +3,13 @@ import './Input.css';
 export default function Input ({inputType, inputLabel, values, isInputValid, onEdit}) {
     return {
         logreg: (
-            <label className='input__label_logreg'>
+            <label className='input input_logreg'>
                 {inputLabel === "name" ? "Имя" : inputLabel === "email" ? "E-mail" : "Пароль" }
                 <input
-                    className={`input input_type_logreg ${
+                    className={`input__field input__field_logreg ${
                         isInputValid === undefined || isInputValid
                           ? ""
-                          : "input_type_logreg_error"
+                          : "input__field_logreg_error"
                       }`}
                     name={`user_${inputLabel}`}
                     type={inputLabel === "name" ? "text" : inputLabel}
@@ -28,10 +28,10 @@ export default function Input ({inputType, inputLabel, values, isInputValid, onE
             </label>
         ),
         edit: (
-            <label className='input__label_profile'>
+            <label className='input input_profile'>
                 {inputLabel === "name" ? "Имя" : "E-mail"}
                 <input 
-                    className='input input_type_profile'
+                    className='input__field input__field_profile'
                     name={`edit_${inputLabel}`}
                     type={inputLabel === "name" ? "text" : inputLabel}
                     required

@@ -17,7 +17,7 @@ export default function Portfolio() {
                     </div>
                     <img className="portfolio__photo" src={photo} alt="Портрет студента"/>
                 </article>
-                <h3 className="portfolio__projects">Портфолио</h3>
+                <h4 className="portfolio__projects">Портфолио</h4>
                 <ul className="portfolio__links">
                     <li className="portfolio__item">
                         <a className="portfolio__link portfolio__link_project" href="https://github.com/OrtiesPN/how-to-learn"  target="_blank" rel="noreferrer">Статичный сайт</a>

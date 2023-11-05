@@ -8,12 +8,12 @@ import {demoSavedMovies} from "../../utils/constants"
 
 export default function SavedMovies() {
     return (
-        <section className="saved-movies">
+        <main className="saved-movies">
             <SearchForm />
             <MoviesCardList movies={demoSavedMovies} savedMoviesSection={true}/>  
             {/* <div className="movies__more">
                 <Button buttonType="more" titleButton="Ещё" />
             </div> */}
-        </section>
+        </main>
     )
 }

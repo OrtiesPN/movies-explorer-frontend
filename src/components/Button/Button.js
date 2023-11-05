@@ -7,19 +7,9 @@ export default function Button ({buttonType, isBurgerClicked, onClickBurger, tit
             <button
                 className="button button_type_header-signin"
                 type="button"
-                aria-labelledby="Войти"
+                aria-label="Войти"
             >
                 Войти
-            </button>
-        ),
-        accountHeader: (
-            <button
-                className="button button_type_header-user"
-                type="button"
-                aria-labelledby="Аккаунт"
-            >
-                <img src={userLogo} alt="User" className="button__logo button__logo_user"/>
-                Аккаунт
             </button>
         ),
         logreg: (
@@ -27,7 +17,7 @@ export default function Button ({buttonType, isBurgerClicked, onClickBurger, tit
                 className="button button_type_logreg"
                 type="submit"
                 disabled={!isValid && true}
-                aria-labelledby={titleButton}
+                aria-label={titleButton}
                 onClick={onClick}
             >
                 {titleButton}
@@ -37,7 +27,7 @@ export default function Button ({buttonType, isBurgerClicked, onClickBurger, tit
             <button
                 className="button button_type_profile"
                 type="button"
-                aria-labelledby={titleButton}
+                aria-label={titleButton}
                 onClick={onClick}
             >
                 {titleButton}
@@ -47,7 +37,7 @@ export default function Button ({buttonType, isBurgerClicked, onClickBurger, tit
             <button
                 className="button button_type_signout"
                 type="button"
-                aria-labelledby={titleButton}
+                aria-label={titleButton}
             >
                 {titleButton}
             </button>
@@ -56,7 +46,7 @@ export default function Button ({buttonType, isBurgerClicked, onClickBurger, tit
             <button
                 className="button button_type_more"
                 type="button"
-                aria-labelledby={titleButton}
+                aria-label={titleButton}
             >
                 {titleButton}
             </button>

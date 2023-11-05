@@ -51,6 +51,7 @@ function App() {
                   onClickBurger={handleBurgerMenuClick}
                 />
                 <Main />
+                <Footer />
               </>
           }/>
           <Route path="/signup" element={<Register/>}/>
