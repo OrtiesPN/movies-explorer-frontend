@@ -1,0 +1,103 @@
+.login {
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__wrapper {
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 70px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__home {
+    margin-bottom: 40px;
+    align-self: flex-start;
+    text-decoration: none;
+    line-height: 0;
+    transition: opacity .4s ease;
+}
+
+.login__home:hover {
+    opacity: .7;
+}
+
+.login__logo {
+    width: 38px;
+    height: 38px;
+    box-sizing: border-box;
+    object-fit: contain;
+    object-position: center;
+}
+
+.login__fieldset {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.login__caption {
+    margin: 16px 0 0;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.login__signup {
+    text-decoration: none;
+    color: #3456F3;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    transition: opacity .4s ease;
+}
+
+.login__signup:hover {
+    opacity: .7;
+}
+
+@media screen and (max-width: 768px) {
+    .login__wrapper {
+        padding: 232px 0;
+    }
+
+}
+
+@media screen and (max-width: 440px) {
+    .login__wrapper {
+        padding: 56px 0 30px;
+    }
+
+    .login__home {
+        align-self: center;
+        margin-bottom: 50px;
+    }
+
+    .login__caption {
+        font-size: 12px;
+    }
+
+    .login__signup {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-height: 440px) {
+    .login__wrapper {
+        padding: 70px 0;
+    }
+
+}

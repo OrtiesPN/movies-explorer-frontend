@@ -1,0 +1,118 @@
+.button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: Inter;
+    font-style: normal;
+    text-align: center;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+    flex-shrink: 0;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+/* Стили для кнопки "еще" */
+
+.button_type_more {
+    width: 320px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    background-color: #f4f4f4;
+    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+/* Стили для кнопки сабмита форм регистрации, логина, профиля */
+
+.button_type_logreg {
+    width: 100%;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    background: #3456F3;
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.button_type_logreg:disabled {
+    pointer-events: none;
+    color: #C2C2C2;
+    background: #F8F8F8;
+}
+
+/* Стили для кнопки открытия редактирования профиля */
+
+.button_type_profile {
+    width: fit-content;
+    color: #000;
+    background: none;
+    border-radius: 0;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+/* Стили для кнопки выхода из аккаунта */
+
+.button_type_signout {
+    margin-bottom: 70px;
+    width: fit-content;
+    color: #EE3465;
+    background: none;
+    border-radius: 0;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+/* Стили для кнопок используемых в хэдере */
+
+.button_type_header-signin{
+    width: 76px;
+    height: 32px;
+    border-radius: 3px;
+    background: #3456F3;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+@media screen and (max-width: 440px) {
+    .button_type_logreg {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .button_type_header-signin{
+        width: 54px;
+        height: 26px;
+        font-size: 10px;
+    }
+
+    .button_type_profile{
+        font-size: 12px;
+    }
+
+    .button_type_signout{
+        font-size: 12px;
+    }
+    
+    .button_type_more {
+        width: 240px;
+    }
+}
