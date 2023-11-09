@@ -80,7 +80,7 @@
 
 .input__error_active {
     position: absolute;
-    top: 50px;
+    top: 45px;
     display: block;
     color: #EE3465;
     font-size: 10px;

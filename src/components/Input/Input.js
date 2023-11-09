@@ -1,6 +1,7 @@
 import './Input.css';
+import { nameRegex } from '../../utils/constants';
 
-export default function Input ({inputType, inputLabel, values, isInputValid, onEdit}) {
+export default function Input ({inputType, inputLabel, minLength="", maxLength="", values, isInputValid, onChange, errors, onEdit}) {
     return {
         logreg: (
             <label className='input input_logreg'>
@@ -13,18 +14,25 @@ export default function Input ({inputType, inputLabel, values, isInputValid, onE
                       }`}
                     name={`user_${inputLabel}`}
                     type={inputLabel === "name" ? "text" : inputLabel}
+                    placeholder={inputLabel === "name" ? "Имя" : inputLabel === "password" ? "Пароль" : "E-mail"}
+                    pattern={inputLabel === "name" ? nameRegex : undefined}
+                    minLength={minLength}
+                    maxLength={maxLength}
                     required
-                    value={values}
-                    readOnly  // dev markup option
+                    value={values ? values : ""}
+                    onChange={onChange}
                 >
                 </input>
-                <span className={`input__error ${
+                <span className="input__error_active">
+                    {errors === "Введите данные в указанном формате." ? "Имя может содержать латиницу или кириллицу, пробел или дефис" :errors}
+                </span>
+                {/* <span className={`input__error ${
                         isInputValid === undefined || isInputValid
                           ? ""
                           : "input__error_active"
                       }`}>
-                    Что-то пошло не так...
-                </span>
+                    {errors}
+                </span> */}
             </label>
         ),
         edit: (
@@ -34,8 +42,11 @@ export default function Input ({inputType, inputLabel, values, isInputValid, onE
                     className='input__field input__field_profile'
                     name={`edit_${inputLabel}`}
                     type={inputLabel === "name" ? "text" : inputLabel}
+                    placeholder={inputLabel === "name" ? "Имя" : "E-mail"}
                     required
-                    value={values}
+                    value={values ? values : ""}
+                    onChange={onChange}
+                    pattern={inputLabel === "name" ? nameRegex : undefined}
                     disabled={!onEdit}
                 >
                 </input>
