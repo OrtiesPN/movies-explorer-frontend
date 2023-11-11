@@ -36,7 +36,7 @@
     border: none;
 }
 
-.profile__inputdivider {
+.profile__divider {
     padding-bottom: 16px;
     margin-bottom: 17px;
     border-bottom: 1px solid #E8E8E8;
@@ -53,7 +53,7 @@
     /* margin-bottom: 70px; */
 }
 
-.profile__error {
+.profile__allert {
     width: 100%;
     position: absolute;
     top: -20px;
@@ -64,6 +64,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.profile__allert_succes {
+    color: #3456F3;
 }
 
 .profile__signout {

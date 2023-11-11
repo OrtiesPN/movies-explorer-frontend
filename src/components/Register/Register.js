@@ -1,3 +1,4 @@
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 import Form from "../Form/Form";
@@ -5,8 +6,12 @@ import Input from "../Input/Input";
 import logo from "../../images/logo.svg";
 
 import useValidator from "../../utils/useValidator";
+import FailContext from "../../contexts/FailContext";
+import IsSendContext from "../../contexts/IsSendContext";
 
 export default function Register ({onSignUp}) {
+    const [isFail, setIsFail] = useContext(FailContext);
+    const isSend = useContext(IsSendContext);
     const { values, errors, isInputValid, isFormValid, handleChange,} =
     useValidator();
 
@@ -18,6 +23,10 @@ export default function Register ({onSignUp}) {
             email: values.user_email
           });
     }
+
+    useEffect(() => {
+        setIsFail(false);
+      },[setIsFail]);
 
     return (
         <main className="register">
@@ -36,6 +45,8 @@ export default function Register ({onSignUp}) {
                     titleButton={"Зарегистрироваться"}
                     isValid={isFormValid}
                     onSubmit={handleSubmit}
+                    isFail={isFail}
+                    isSend={isSend}
                 >
                     <fieldset className="register__fieldset">
                         <Input
@@ -46,6 +57,7 @@ export default function Register ({onSignUp}) {
                             maxLength={"30"}
                             isInputValid={isInputValid.user_name}
                             onChange={handleChange}
+                            onClick={() => setIsFail(false)}
                             errors={errors.user_name}
                             />
                             <Input
@@ -54,6 +66,7 @@ export default function Register ({onSignUp}) {
                             inputLabel={"email"}
                             isInputValid={isInputValid.user_email}
                             onChange={handleChange}
+                            onClick={() => setIsFail(false)}
                             errors={errors.user_email}
                             />
                             <Input
@@ -64,6 +77,7 @@ export default function Register ({onSignUp}) {
                             maxLength={"8"}
                             isInputValid={isInputValid.user_password}
                             onChange={handleChange}
+                            onClick={() => setIsFail(false)}
                             errors={errors.user_password}
                             />
                     </fieldset>

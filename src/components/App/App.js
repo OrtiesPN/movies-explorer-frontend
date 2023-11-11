@@ -21,59 +21,79 @@ import ProtectedElement from '../ProtectedElement/ProtectedElement';
 
 import { mainApi } from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import LoggedInContext from '../../contexts/LoggedInContext';
+import FailContext from '../../contexts/FailContext';
+import IsSendContext from '../../contexts/IsSendContext';
 
 function App() {
   const navigate = useNavigate();
 
-  // demo dev functions
-
   const [currentUser, setCurrentUser] = useState({});
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn ] = useState(false);
 
   const [isBurgerClicked, setIsBurgerClicked] = useState(false);
+
+  const [isSend, setIsSend] = useState(false);
+  const [isFail, setIsFail] = useState(false);
+  const [isOnEdit, setIsOnEdit] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   function handleBurgerMenuClick () {
     setIsBurgerClicked(!isBurgerClicked)
   }
 
-  function handleRegister(data) {
-    mainApi
-    .setRegistration(data)
-    .then((res) => {
-      mainApi.setAuthorization(data)
-      .then((res) => {
-        setCurrentUser(res);
-        setLoggedIn(true);
-        navigate("/movies");
-      })
-      .catch((err) => {
-        console.error(`Login failed: ${err}`);
-    })
-    .catch((err) => {
-      console.error(`Registration failed: ${err}`);
-    });
-    })
-  }
-
   function handleLogin(data) {
+    setIsSend(true);
     mainApi.setAuthorization(data)
       .then((res) => {
         setCurrentUser(res);
         setLoggedIn(true);
+        setIsSend(false);
         navigate("/movies");
       })
       .catch((err) => {
-        console.error(`Login failed: ${err}`);
-  })
-}
+        setIsFail(true);
+        console.error(`Login failed: ${err}`)
+      })
+      .finally(() => {
+        setIsSend(false);
+      })
+  }
 
-function handleSubmit(data) {
+  function handleRegister(data) {
+    setIsSend(true);
+    mainApi
+    .setRegistration(data)
+    .then((res) => {
+      handleLogin(data);
+    })
+    .catch((err) => {
+      setIsFail(true)
+      console.error(`Registration failed: ${err}`);
+    })
+    .finally(() => {
+      setIsSend(false);
+    })
+  }
+
+
+
+function handleEditUser(data) {
+  setIsSend(true);
   mainApi.setUserInfo(data)
     .then((res) => {
       setCurrentUser(res);
+      setIsSend(false);
+      setIsOnEdit(false);
+      setIsSuccess(true);
     })
     .catch((err) => {
+      setIsFail(true);
+      setIsSend(false);
       console.error(`Edit profile failed: ${err}`);
+    })
+    .finally(() => {
+      console.log(isFail)
     })
 }
 
@@ -107,7 +127,10 @@ function handleSubmit(data) {
   // return markup
 
   return (
+    <LoggedInContext.Provider value={isLoggedIn}>
     <CurrentUserContext.Provider value={currentUser}>
+      <IsSendContext.Provider value={isSend}>
+      <FailContext.Provider value={[isFail, setIsFail]}>
     <div className="app">
       <div className="app__container">
         <Routes>
@@ -116,7 +139,6 @@ function handleSubmit(data) {
             element={
               <>
                 <Header 
-                  isLoggedIn={isLoggedIn}
                   isBurgerClicked={isBurgerClicked}
                   onClickBurger={handleBurgerMenuClick}
                 />
@@ -124,15 +146,14 @@ function handleSubmit(data) {
                 <Footer />
               </>
           }/>
-          <Route path="/signup" element={<Register onSignUp={handleRegister}/>}/>
-          <Route path="/signin" element={<Login onSignIn={handleLogin}/>}/>
+          <Route path="/signup" element={<Register onSignUp={handleRegister} />}/>
+          <Route path="/signin" element={<Login onSignIn={handleLogin} />}/>
           <Route
             path="/movies" 
             element={
               <ProtectedRoute
                 element={ProtectedElement}
                 elementType="movies"
-                isLoggedIn={isLoggedIn}
                 isBurgerClicked={isBurgerClicked}
                 handleBurgerMenuClick={handleBurgerMenuClick}
               />
@@ -143,7 +164,6 @@ function handleSubmit(data) {
               <ProtectedRoute
                 element={ProtectedElement}
                 elementType="savedMovies"
-                isLoggedIn={isLoggedIn}
                 isBurgerClicked={isBurgerClicked}
                 handleBurgerMenuClick={handleBurgerMenuClick}
               />
@@ -154,12 +174,14 @@ function handleSubmit(data) {
               <ProtectedRoute
                 element={ProtectedElement}
                 elementType="profile"
-                isLoggedIn={isLoggedIn}
-                loggedIn={isLoggedIn}
                 isBurgerClicked={isBurgerClicked}
                 handleBurgerMenuClick={handleBurgerMenuClick}
-                handleSubmit={handleSubmit}
+                handleSubmit={handleEditUser}
                 handleExit={handleExit}
+                isOnEdit={isOnEdit}
+                setIsOnEdit={setIsOnEdit}
+                isSuccess={isSuccess}
+                setIsSuccess={setIsSuccess}
               />
             }/>
           <Route
@@ -170,7 +192,10 @@ function handleSubmit(data) {
         </Routes>
       </div>
     </div>
+    </FailContext.Provider>
+    </IsSendContext.Provider>
     </CurrentUserContext.Provider>
+    </LoggedInContext.Provider>
   );
 }
 

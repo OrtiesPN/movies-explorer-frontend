@@ -8,8 +8,11 @@ export default function Form({
   titleButton,
   isValid = true,
   onSubmit,
+  isFail,
+  isSend,
   children,
 }) {
+
   return (
     <form
       className="form"
@@ -19,7 +22,8 @@ export default function Form({
         <h2 className="form__title">{title}</h2>
         {children}
         <div className="form__button-wrapper">
-          <Button buttonType={buttonType} titleButton={titleButton} isValid={isValid} />
+          <span className="form__alert">{isFail && "Что-то пошло не так"}</span>
+          <Button buttonType={buttonType} titleButton={titleButton} isValid={isValid} isFail={isFail} isSend={isSend} />
         </div>
       </form>
   )

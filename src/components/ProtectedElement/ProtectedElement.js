@@ -6,7 +6,6 @@ import Footer from "../Footer/Footer"
 
 export default function ProtectedElement({
     elementType,
-    loggedIn,
     isBurgerClicked,
     handleBurgerMenuClick,
     handleSubmit,
@@ -17,7 +16,6 @@ export default function ProtectedElement({
         movies:
             <>
                 <Header 
-                    isLoggedIn={loggedIn}
                     isBurgerClicked={isBurgerClicked}
                     onClickBurger={handleBurgerMenuClick}
                 />
@@ -26,8 +24,7 @@ export default function ProtectedElement({
             </>,
         savedMovies:
             <>
-                <Header 
-                    isLoggedIn={loggedIn}
+                <Header
                     isBurgerClicked={isBurgerClicked}
                     onClickBurger={handleBurgerMenuClick}
                 />
@@ -36,14 +33,14 @@ export default function ProtectedElement({
             </>,
         profile:
             <>
-                <Header 
-                    isLoggedIn={loggedIn}
+                <Header
                     isBurgerClicked={isBurgerClicked}
                     onClickBurger={handleBurgerMenuClick}
                 />
                 <Profile
                     onSubmit={handleSubmit}
                     onSignout={handleExit}
+                    {...props}
                 />
             </>,
     }[elementType];

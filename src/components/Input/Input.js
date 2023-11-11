@@ -1,7 +1,7 @@
 import './Input.css';
 import { nameRegex } from '../../utils/constants';
 
-export default function Input ({inputType, inputLabel, minLength="", maxLength="", values, isInputValid, onChange, errors, onEdit}) {
+export default function Input ({inputType, inputLabel, minLength="", maxLength="", values, placeholder, isInputValid, onChange, errors, onEdit, onClick}) {
     return {
         logreg: (
             <label className='input input_logreg'>
@@ -21,6 +21,7 @@ export default function Input ({inputType, inputLabel, minLength="", maxLength="
                     required
                     value={values ? values : ""}
                     onChange={onChange}
+                    onClick={onClick}
                 >
                 </input>
                 <span className="input__error_active">
@@ -42,10 +43,11 @@ export default function Input ({inputType, inputLabel, minLength="", maxLength="
                     className='input__field input__field_profile'
                     name={`edit_${inputLabel}`}
                     type={inputLabel === "name" ? "text" : inputLabel}
-                    placeholder={inputLabel === "name" ? "Имя" : "E-mail"}
+                    placeholder={placeholder}
                     required
                     value={values ? values : ""}
                     onChange={onChange}
+                    onClick={onClick}
                     pattern={inputLabel === "name" ? nameRegex : undefined}
                     disabled={!onEdit}
                 >
