@@ -1,5 +1,9 @@
 # Фронт-енд часть для дипломного проекта Movies-explorer
 
+## level-3 // Функциональная часть проекта:
+- Pull-request: https://github.com/OrtiesPN/movies-explorer-frontend/pull/2
+- Приложение: https://diploma-orties.nomoredomainsrocks.ru
+
 ## level-2:
 - React приложение
 - Адаптивная верстка на jsx: семантический html, сетка на flex/grid, стили и анимации на CSS

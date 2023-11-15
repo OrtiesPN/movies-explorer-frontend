@@ -132,7 +132,7 @@
 } */
 
 @media screen and (max-width: 370px) {
-    .navigation__list_user_mobile {
+    .navigation__list_user-mobile {
         width: 100%;
     }
 }

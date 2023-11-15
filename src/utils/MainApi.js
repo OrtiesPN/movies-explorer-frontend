@@ -10,6 +10,13 @@ class MainApi {
       return Promise.reject(`Error ${res.status} ${res.statusText}`);
     }
 
+    _checkResJSON(res) {
+      if (res.ok) {
+        return res => res.json();
+      }
+      return Promise.reject(`Error ${res.status} ${res.statusText}`);
+    }
+
     // Методы пользователя
   
     setRegistration(data) {
@@ -65,7 +72,7 @@ class MainApi {
             method: "POST",      
             credentials: 'include',
             headers: {"Content-Type": "application/json"},
-        }).then(this._checkRes);
+        }).then(this._checkResJSON);
     }
 
     // методы фильмов
@@ -91,7 +98,7 @@ class MainApi {
                 description: data.description,
                 image: `https://api.nomoreparties.co${data.image.url}`,
                 trailerLink: data.trailerLink,
-                thumbnail: `https://api.nomoreparties.co${data.thumbnail.url}`,
+                thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
                 nameRU: data.nameRU,
                 nameEN: data.nameEN,
                 movieId: data.id,
@@ -100,7 +107,7 @@ class MainApi {
     }
 
     deleteMovie(data) {
-        return fetch(`${this._baseUrl}/movies/${data.cardId}`, {
+        return fetch(`${this._baseUrl}/movies/${data._id}`, {
             method: "DELETE",      
             credentials: 'include',
             headers: {"Content-Type": "application/json"},
@@ -110,7 +117,7 @@ class MainApi {
   }
 
   export const mainApi = new MainApi({
-    // baseUrl: "https://api.diploma-orties.nomoredomainsrocks.ru"
-    baseUrl: "http://localhost:3000",
+    baseUrl: "https://api.diploma-orties.nomoredomainsrocks.ru"
+    // baseUrl: "http://localhost:3000",
   });
   

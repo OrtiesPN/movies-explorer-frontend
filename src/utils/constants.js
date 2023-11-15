@@ -1,136 +1,5 @@
 import movieCover from "../images/movie.jpg"
 
-const demoMovies = [
-    {
-        id: "001",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "002",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "003",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "004",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "005",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "006",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "007",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Очень-очень длинное название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "008",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "009",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "010",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Длинное название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "011",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "012",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "013",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "014",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "015",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "016",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-]
-
 const demoSavedMovies = [
     {
         id: "001",
@@ -158,8 +27,52 @@ const demoSavedMovies = [
     },
 ]
 
+// Regex
+
 const nameRegex = "[A-Za-zА-Яа-яЁё\\s\\-]{2,30}";
 const passwordRegex = /^.$/gm;
 const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/gm;
 
-export {demoMovies, demoSavedMovies, nameRegex, passwordRegex, emailRegex};
+// img api
+
+const beatApi = "https://api.nomoreparties.co"
+
+// Limiter constants
+
+const desktop = 1280;
+const tabletWide = 990;
+const tablet = 768;
+const mobile = 540;
+
+const desktopBody = 16;
+const tabletWideBody = 12;
+const tabletBody = 8;
+const mobileBody = 5;
+
+const desktopStep = 4;
+const tabletWideStep = 3;
+const tabletStep = 2;
+const mobileStep = 2;
+
+
+
+
+export {
+    demoSavedMovies,
+    nameRegex,
+    passwordRegex,
+    emailRegex,
+    beatApi,
+    desktop,
+    tablet,
+    tabletWide,
+    mobile,
+    desktopBody,
+    desktopStep,
+    tabletBody,
+    tabletStep,
+    tabletWideBody,
+    tabletWideStep,
+    mobileBody,
+    mobileStep
+};

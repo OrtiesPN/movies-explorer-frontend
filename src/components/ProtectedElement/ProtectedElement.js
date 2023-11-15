@@ -10,6 +10,10 @@ export default function ProtectedElement({
     handleBurgerMenuClick,
     handleSubmit,
     handleExit,
+    handleMovieLike,
+    handleMovieDislike,
+    handleMovieDelete,
+    savedMovies,
     ...props}) {
 
     return {
@@ -19,7 +23,11 @@ export default function ProtectedElement({
                     isBurgerClicked={isBurgerClicked}
                     onClickBurger={handleBurgerMenuClick}
                 />
-                <Movies />
+                <Movies
+                    savedMovies={savedMovies}
+                    handleMovieLike={handleMovieLike}
+                    handleMovieDislike={handleMovieDislike}
+                />
                 <Footer />
             </>,
         savedMovies:
@@ -28,7 +36,10 @@ export default function ProtectedElement({
                     isBurgerClicked={isBurgerClicked}
                     onClickBurger={handleBurgerMenuClick}
                 />
-                <SavedMovies />
+                <SavedMovies
+                    savedMovies={savedMovies}
+                    handleMovieDelete={handleMovieDelete}
+                />
                 <Footer />
             </>,
         profile:

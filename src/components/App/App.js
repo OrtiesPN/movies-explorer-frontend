@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, } from "react";
 import {
   Routes,
   Route,
@@ -9,12 +9,9 @@ import {
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
-import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import ProtectedElement from '../ProtectedElement/ProtectedElement';
@@ -24,9 +21,12 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import LoggedInContext from '../../contexts/LoggedInContext';
 import FailContext from '../../contexts/FailContext';
 import IsSendContext from '../../contexts/IsSendContext';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
   const navigate = useNavigate();
+
+  const [inProgress, setInProgress] = useState(true);
 
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setLoggedIn ] = useState(false);
@@ -38,9 +38,13 @@ function App() {
   const [isOnEdit, setIsOnEdit] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const [savedMovies, setSavedMovies] = useState([]);
+
   function handleBurgerMenuClick () {
     setIsBurgerClicked(!isBurgerClicked)
   }
+
+  // логика пользователя
 
   function handleLogin(data) {
     setIsSend(true);
@@ -76,126 +80,168 @@ function App() {
     })
   }
 
-
-
 function handleEditUser(data) {
   setIsSend(true);
   mainApi.setUserInfo(data)
     .then((res) => {
       setCurrentUser(res);
-      setIsSend(false);
       setIsOnEdit(false);
       setIsSuccess(true);
+      console.log(isSuccess);
     })
     .catch((err) => {
       setIsFail(true);
-      setIsSend(false);
       console.error(`Edit profile failed: ${err}`);
     })
     .finally(() => {
-      console.log(isFail)
+      setIsSend(false);
     })
 }
-
 
   function handleExit() {
     mainApi.signOut()
       .then(() => {
-        // setLoggedIn(false);
-        setCurrentUser({});
-      })
-      .finally(() => {
+        setLoggedIn(false);
+        localStorage.clear();
         navigate('/')
-        setLoggedIn(false);})
+      })
       .catch(err => {
         console.error(`Signout failed: ${err}`);
       });
   }
 
+  // добавление и удаление фильмов
+
+  function handleMovieLike(data) {
+    mainApi
+      .addMovie(data)
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .catch((err) => {
+        setIsFail(true);
+        console.log(`Failed to save movie: ${err}`);
+      });
+  }
+
+  function handleMovieDislike(data) {
+    const searchInSaved = savedMovies.filter((movie) => {
+      return movie.movieId === data.id
+    })
+    handleMovieDelete(searchInSaved[0])
+}
+
+  function handleMovieDelete(data) {
+    console.log(savedMovies)
+    mainApi
+      .deleteMovie(data)
+      .then(() => {
+        const updList = savedMovies.filter(movie => { return movie._id !== data._id })
+        setSavedMovies(updList);
+        console.log(savedMovies)
+      })
+      .catch((err) => {
+        setIsFail(true);
+        console.log(`Failed to delete movie: ${err}`);
+      });
+  }
+
+  // фоновая авторизация
+
   useEffect(() => {
     if (!isLoggedIn) {
-    mainApi.getUserInfo()
-    .then((userData) => {
-      setLoggedIn(true);
-      setCurrentUser(userData);
-      navigate('/');
-    })
-    .catch((error) => console.error(`Ошибка авторизации ${error}`));
-  }
-  }, [isLoggedIn, navigate]);
+      Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
+        .then(([userData, moviesData]) => {
+          setLoggedIn(true);
+          setCurrentUser(userData);
+          setSavedMovies(moviesData)
+          setInProgress(false);
+        })
+        .catch((error) => console.error(`Ошибка авторизации ${error}`))
+        .finally(() => setInProgress(false))
+      }
+      }, [isLoggedIn, navigate]);
 
   // return markup
 
   return (
-    <LoggedInContext.Provider value={isLoggedIn}>
-    <CurrentUserContext.Provider value={currentUser}>
-      <IsSendContext.Provider value={isSend}>
-      <FailContext.Provider value={[isFail, setIsFail]}>
     <div className="app">
       <div className="app__container">
-        <Routes>
-          <Route 
-            path="/"
-            element={
-              <>
-                <Header 
-                  isBurgerClicked={isBurgerClicked}
-                  onClickBurger={handleBurgerMenuClick}
-                />
-                <Main />
-                <Footer />
-              </>
-          }/>
-          <Route path="/signup" element={<Register onSignUp={handleRegister} />}/>
-          <Route path="/signin" element={<Login onSignIn={handleLogin} />}/>
-          <Route
-            path="/movies" 
-            element={
-              <ProtectedRoute
-                element={ProtectedElement}
-                elementType="movies"
-                isBurgerClicked={isBurgerClicked}
-                handleBurgerMenuClick={handleBurgerMenuClick}
-              />
-            }/>
-          <Route
-            path="/saved-movies" 
-            element={
-              <ProtectedRoute
-                element={ProtectedElement}
-                elementType="savedMovies"
-                isBurgerClicked={isBurgerClicked}
-                handleBurgerMenuClick={handleBurgerMenuClick}
-              />
-            }/>
-          <Route
-            path="/profile" 
-            element={
-              <ProtectedRoute
-                element={ProtectedElement}
-                elementType="profile"
-                isBurgerClicked={isBurgerClicked}
-                handleBurgerMenuClick={handleBurgerMenuClick}
-                handleSubmit={handleEditUser}
-                handleExit={handleExit}
-                isOnEdit={isOnEdit}
-                setIsOnEdit={setIsOnEdit}
-                isSuccess={isSuccess}
-                setIsSuccess={setIsSuccess}
-              />
-            }/>
-          <Route
-            path="/404" 
-            element={<NotFound />}
-          />
-          <Route path="*" element={<Navigate to="/404" replace />} />
-        </Routes>
+        {inProgress ? <Preloader /> :
+        <LoggedInContext.Provider value={isLoggedIn}>
+          <CurrentUserContext.Provider value={currentUser}>
+            <IsSendContext.Provider value={isSend}>
+              <FailContext.Provider value={[isFail, setIsFail]}>
+                <Routes>
+                  <Route 
+                    path="/"
+                    element={
+                      <>
+                        <Header 
+                          isBurgerClicked={isBurgerClicked}
+                          onClickBurger={handleBurgerMenuClick}
+                        />
+                        <Main />
+                        <Footer />
+                      </>
+                  }/>
+                  <Route path="/signup" element={<Register onSignUp={handleRegister} />}/>
+                  <Route path="/signin" element={<Login onSignIn={handleLogin} />}/>
+                  <Route
+                    path="/movies" 
+                    element={
+                      <ProtectedRoute
+                        element={ProtectedElement}
+                        elementType="movies"
+                        isBurgerClicked={isBurgerClicked}
+                        handleBurgerMenuClick={handleBurgerMenuClick}
+                        savedMovies={savedMovies}
+                        handleMovieLike={handleMovieLike}
+                        handleMovieDislike={handleMovieDislike}
+                      />
+                    }/>
+                  <Route
+                    path="/saved-movies" 
+                    element={
+                      <ProtectedRoute
+                        element={ProtectedElement}
+                        elementType="savedMovies"
+                        isBurgerClicked={isBurgerClicked}
+                        handleBurgerMenuClick={handleBurgerMenuClick}
+                        savedMovies={savedMovies}
+                        handleMovieDelete={handleMovieDelete}
+                      />
+                    }/>
+                  <Route
+                    path="/profile" 
+                    element={
+                      <ProtectedRoute
+                        element={ProtectedElement}
+                        elementType="profile"
+                        isBurgerClicked={isBurgerClicked}
+                        handleBurgerMenuClick={handleBurgerMenuClick}
+                        handleSubmit={handleEditUser}
+                        handleExit={handleExit}
+                        isOnEdit={isOnEdit}
+                        setIsOnEdit={setIsOnEdit}
+                        isSuccess={isSuccess}
+                        setIsSuccess={setIsSuccess}
+                      />
+                    }/>
+                  <Route
+                    path="/404" 
+                    element={<NotFound />}
+                  />
+                  <Route path="*" element={<Navigate to="/404" replace />} />
+                </Routes>
+              </FailContext.Provider>
+            </IsSendContext.Provider>
+          </CurrentUserContext.Provider>
+        </LoggedInContext.Provider>
+        }
+      
       </div>
     </div>
-    </FailContext.Provider>
-    </IsSendContext.Provider>
-    </CurrentUserContext.Provider>
-    </LoggedInContext.Provider>
   );
 }
 

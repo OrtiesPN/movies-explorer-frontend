@@ -1,7 +1,10 @@
 import './Input.css';
 import { nameRegex } from '../../utils/constants';
+import IsSendContext from '../../contexts/IsSendContext';
+import { useContext } from 'react';
 
 export default function Input ({inputType, inputLabel, minLength="", maxLength="", values, placeholder, isInputValid, onChange, errors, onEdit, onClick}) {
+    const isSend = useContext(IsSendContext);
     return {
         logreg: (
             <label className='input input_logreg'>
@@ -22,6 +25,7 @@ export default function Input ({inputType, inputLabel, minLength="", maxLength="
                     value={values ? values : ""}
                     onChange={onChange}
                     onClick={onClick}
+                    disabled={isSend}
                 >
                 </input>
                 <span className="input__error_active">
@@ -49,7 +53,7 @@ export default function Input ({inputType, inputLabel, minLength="", maxLength="
                     onChange={onChange}
                     onClick={onClick}
                     pattern={inputLabel === "name" ? nameRegex : undefined}
-                    disabled={!onEdit}
+                    disabled={!onEdit || isSend}
                 >
                 </input>
             </label>

@@ -1,5 +1,9 @@
-.movies__more {
-    display: flex;
-    justify-content: center;
-    padding: 80px 0;
+.movies__message {
+    padding-top: 80px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
 }

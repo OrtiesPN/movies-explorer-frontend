@@ -40,9 +40,13 @@ export default function Profile ({onSubmit, onSignout, isOnEdit, setIsOnEdit, is
 
     useEffect(() => {
         setIsFail(false);
-        setIsSuccess(false);
         setIsOnEdit(false);
-      },[setIsFail, setIsSuccess, setIsOnEdit]);
+        reset(currentUser);
+      },[setIsFail, setIsOnEdit, reset, currentUser]);
+
+    useEffect(() => {
+        setIsSuccess(false);
+    }, [setIsSuccess])
 
 
     return (

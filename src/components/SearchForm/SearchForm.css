@@ -74,6 +74,10 @@
     opacity: .7;
 }
 
+.search__go:disabled {
+    cursor: not-allowed;
+}
+
 .search__options {
     margin-left: 19px;
     margin-right: 30px;
