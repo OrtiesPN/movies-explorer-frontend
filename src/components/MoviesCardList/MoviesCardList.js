@@ -2,7 +2,7 @@ import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Button from "../Button/Button";
 import Preloader from "../Preloader/Preloader"
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
     tablet,

@@ -1,12 +1,9 @@
 import "./SavedMovies.css"
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import {demoSavedMovies} from "../../utils/constants"
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 export default function SavedMovies({handleMovieDelete, savedMovies}) {
-    const location = useLocation();
     const [noSaves, setNoSaves] = useState(true);
     const [isShort, setIsShort] = useState(false);
     const [query, setQuery] = useState("");

@@ -1,37 +1,8 @@
-import movieCover from "../images/movie.jpg"
-
-const demoSavedMovies = [
-    {
-        id: "001",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "002",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-    {
-        id: "003",
-        duration: "90",
-        image: movieCover,
-        trailerLink: "#",
-        nameRU: "Название фильма",
-        nameEN: "Movie title",
-    },
-]
-
 // Regex
 
 const nameRegex = "[A-Za-zА-Яа-яЁё\\s\\-]{2,30}";
-const passwordRegex = /^.$/gm;
-const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/gm;
+// const passwordRegex = /^.$/gm;
+const emailRegex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
 
 // img api
 
@@ -58,9 +29,8 @@ const mobileStep = 2;
 
 
 export {
-    demoSavedMovies,
     nameRegex,
-    passwordRegex,
+    // passwordRegex,
     emailRegex,
     beatApi,
     desktop,

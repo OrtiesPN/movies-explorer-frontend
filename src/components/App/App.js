@@ -185,8 +185,8 @@ function handleEditUser(data) {
                         <Footer />
                       </>
                   }/>
-                  <Route path="/signup" element={<Register onSignUp={handleRegister} />}/>
-                  <Route path="/signin" element={<Login onSignIn={handleLogin} />}/>
+                  <Route path="/signup" element={isLoggedIn ? <Navigate to='/movies' replace /> : <Register onSignUp={handleRegister} />}/>
+                  <Route path="/signin" element={isLoggedIn ? <Navigate to='/movies' replace /> : <Login onSignIn={handleLogin} />}/>
                   <Route
                     path="/movies" 
                     element={

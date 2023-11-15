@@ -1,5 +1,5 @@
 import "./Button.css";
-import userLogo from "../../images/icon__COLOR_icon-main.svg"
+// import userLogo from "../../images/icon__COLOR_icon-main.svg"
 
 export default function Button ({buttonType, isBurgerClicked, onClickBurger, titleButton, isValid, isFail, isSend, onClick}) {
     return {

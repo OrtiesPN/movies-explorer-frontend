@@ -1,5 +1,5 @@
 import './Input.css';
-import { nameRegex } from '../../utils/constants';
+import { nameRegex, emailRegex } from '../../utils/constants';
 import IsSendContext from '../../contexts/IsSendContext';
 import { useContext } from 'react';
 
@@ -18,7 +18,7 @@ export default function Input ({inputType, inputLabel, minLength="", maxLength="
                     name={`user_${inputLabel}`}
                     type={inputLabel === "name" ? "text" : inputLabel}
                     placeholder={inputLabel === "name" ? "Имя" : inputLabel === "password" ? "Пароль" : "E-mail"}
-                    pattern={inputLabel === "name" ? nameRegex : undefined}
+                    pattern={inputLabel === "name" ? nameRegex : inputLabel === "email" ? emailRegex : undefined}
                     minLength={minLength}
                     maxLength={maxLength}
                     required
@@ -31,13 +31,6 @@ export default function Input ({inputType, inputLabel, minLength="", maxLength="
                 <span className="input__error_active">
                     {errors === "Введите данные в указанном формате." ? "Имя может содержать латиницу или кириллицу, пробел или дефис" :errors}
                 </span>
-                {/* <span className={`input__error ${
-                        isInputValid === undefined || isInputValid
-                          ? ""
-                          : "input__error_active"
-                      }`}>
-                    {errors}
-                </span> */}
             </label>
         ),
         edit: (
@@ -52,7 +45,7 @@ export default function Input ({inputType, inputLabel, minLength="", maxLength="
                     value={values ? values : ""}
                     onChange={onChange}
                     onClick={onClick}
-                    pattern={inputLabel === "name" ? nameRegex : undefined}
+                    pattern={inputLabel === "name" ? nameRegex : inputLabel === "email" ? emailRegex : undefined}
                     disabled={!onEdit || isSend}
                 >
                 </input>
