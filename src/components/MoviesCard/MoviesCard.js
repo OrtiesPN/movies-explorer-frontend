@@ -1,19 +1,14 @@
 import "./MoviesCard.css"
-import { useEffect, useState} from "react";
 import { beatApi } from "../../utils/constants";
 import { useLocation } from "react-router-dom";
 
 export default function MoviesCard({savedMovies, savedMoviesSection, handleMovieLike, handleMovieDislike, handleMovieDelete, ...props}) {
   const location = useLocation();
-  const [isLiked, setIsLiked] = useState(false);
 
   function onLikeClick() {
     if (savedMovies.some(item => props.id === item.movieId)) {
         handleMovieDislike(props)
-        setIsLiked(false)
-        
     } else {
-        setIsLiked(true)
         handleMovieLike(props)
       }
     }
@@ -21,11 +16,6 @@ export default function MoviesCard({savedMovies, savedMoviesSection, handleMovie
     function onDeleteClick() {
       handleMovieDelete(props)
     }
-
-    useEffect(() => {
-      if (location.pathname === '/movies')
-        setIsLiked(savedMovies.some(item => props.id === item.movieId))
-    }, [setIsLiked, props.id, savedMovies, location]) 
   
   return (
     <li className="card">
@@ -39,7 +29,7 @@ export default function MoviesCard({savedMovies, savedMoviesSection, handleMovie
             </div>
             { location.pathname === "/movies" ? (
               <button
-                className={`card__button card__button${isLiked ? "_active" : "_inactive"}`}
+                className={`card__button card__button${savedMovies.some(item => props.id === item.movieId) ? "_active" : "_inactive"}`}
                 type="button"
                 aria-label="В коллекцию"
                 onClick={onLikeClick}

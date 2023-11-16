@@ -2,7 +2,7 @@
 
 const nameRegex = "[A-Za-zА-Яа-яЁё\\s\\-]{2,30}";
 // const passwordRegex = /^.$/gm;
-const emailRegex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+const emailRegex = "^\\S+@\\S+\\.\\S+$";
 
 // img api
 

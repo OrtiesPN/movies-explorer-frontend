@@ -154,7 +154,7 @@ function handleEditUser(data) {
         .then(([userData, moviesData]) => {
           setLoggedIn(true);
           setCurrentUser(userData);
-          setSavedMovies(moviesData)
+          setSavedMovies(moviesData.reverse())
           setInProgress(false);
         })
         .catch((error) => console.error(`Ошибка авторизации ${error}`))

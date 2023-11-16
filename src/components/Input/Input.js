@@ -29,7 +29,7 @@ export default function Input ({inputType, inputLabel, minLength="", maxLength="
                 >
                 </input>
                 <span className="input__error_active">
-                    {errors === "Введите данные в указанном формате." ? "Имя может содержать латиницу или кириллицу, пробел или дефис" :errors}
+                    {errors}
                 </span>
             </label>
         ),

@@ -1,7 +1,7 @@
 import "./Button.css";
 // import userLogo from "../../images/icon__COLOR_icon-main.svg"
 
-export default function Button ({buttonType, isBurgerClicked, onClickBurger, titleButton, isValid, isFail, isSend, onClick}) {
+export default function Button ({buttonType, titleButton, isValid, isFail, isSend, onClick, isSame}) {
     return {
         signinHeader: (
             <button
@@ -16,7 +16,7 @@ export default function Button ({buttonType, isBurgerClicked, onClickBurger, tit
             <button
                 className="button button_type_logreg"
                 type="submit"
-                disabled={!isValid || isFail || isSend ? true : false}
+                disabled={!isValid || isFail || isSend || isSame ? true : false}
                 aria-label={titleButton}
                 onClick={onClick}
             >

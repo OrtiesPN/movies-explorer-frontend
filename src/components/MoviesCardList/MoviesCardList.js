@@ -16,7 +16,6 @@ import {
     tabletWideStep,
     mobileBody,
     mobileStep,
-    desktop
 } from "../../utils/constants"
 import { useLocation } from "react-router-dom";
 
@@ -79,13 +78,13 @@ export default function MoviesCardList({movies, isAwaitApi, firstSearch, isNotFo
     return (
         isAwaitApi ? (
             <Preloader />
-            ) : (
+            ) : firstSearch ? (
+                <Preloader /> ) : (
                 <>
                 <p className={`elements-message ${isNotFound || isFail || noSaves || firstSearch ? "elements-message_active" : ""}`}>
                    {isNotFound & !firstSearch ? "Ничего не найдено" :
                    isFail ? "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз" :
-                   noSaves ? "У вас нет сохраненных фильмов" :
-                   firstSearch ? <Preloader /> : ""}
+                   noSaves ? "У вас нет сохраненных фильмов" : ""}
                 </p>
                 { location.pathname === "/movies" ? (
                     <>
@@ -109,10 +108,10 @@ export default function MoviesCardList({movies, isAwaitApi, firstSearch, isNotFo
                     
                 ) : (
                     <ul className={`elements ${movies.length === 0 ? "elements_hidden" : ""}`}>
-                            {movies.map(({id, ...rest}) => (
+                            {movies.map(({movieId, ...rest}) => (
                                 <MoviesCard
-                                    key={id}
-                                    id={id}
+                                    key={movieId}
+                                    id={movieId}
                                     handleMovieDelete={handleMovieDelete}
                                     savedMoviesSection={savedMoviesSection}
                                     {...rest}
