@@ -54,6 +54,14 @@ function App() {
         setLoggedIn(true);
         setIsSend(false);
         navigate("/movies");
+        mainApi.getMovies()
+          .then((res) => {
+            setSavedMovies(res.reverse())
+          })
+            .catch((err) => {
+              setIsFail(true);
+              console.error(`User movies load failed: ${err}`)
+          })
       })
       .catch((err) => {
         setIsFail(true);
@@ -102,6 +110,7 @@ function handleEditUser(data) {
     mainApi.signOut()
       .then(() => {
         setLoggedIn(false);
+        setSavedMovies([]);
         localStorage.clear();
         navigate('/')
       })
@@ -132,13 +141,11 @@ function handleEditUser(data) {
 }
 
   function handleMovieDelete(data) {
-    console.log(savedMovies)
     mainApi
       .deleteMovie(data)
       .then(() => {
         const updList = savedMovies.filter(movie => { return movie._id !== data._id })
         setSavedMovies(updList);
-        console.log(savedMovies)
       })
       .catch((err) => {
         setIsFail(true);
