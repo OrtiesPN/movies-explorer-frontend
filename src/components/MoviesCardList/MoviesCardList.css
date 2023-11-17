@@ -11,6 +11,36 @@
     /* justify-content: center; */
 }
 
+.elements_hidden {
+    display: none;
+}
+
+.elements-message {
+    display: none;
+}
+
+.elements-message_active {
+    display: block;
+    margin: 0 auto 0;
+    padding: 80px 0 0;
+    width: calc(100% - 140px);
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.elements-more {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+.elements-more_hidden {
+    display: none;
+}
+
 @media screen and (max-width: 990px) {
     .elements {
         grid-template-columns: repeat(3, 1fr);
@@ -23,6 +53,11 @@
         gap: 36px 30px;
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .elements-message_active {
+        width: calc(100% - 60px);
+    }
+
 }
 
 @media screen and (max-width: 540px) {
@@ -33,5 +68,9 @@
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(5,1fr);
         justify-items: center;
+    }
+
+    .elements-message_active {
+        width: calc(100% - 10px);
     }
 }

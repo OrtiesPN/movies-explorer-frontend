@@ -6,44 +6,52 @@ import Footer from "../Footer/Footer"
 
 export default function ProtectedElement({
     elementType,
-    loggedIn,
     isBurgerClicked,
     handleBurgerMenuClick,
     handleSubmit,
     handleExit,
+    handleMovieLike,
+    handleMovieDislike,
+    handleMovieDelete,
+    savedMovies,
     ...props}) {
 
     return {
         movies:
             <>
                 <Header 
-                    isLoggedIn={loggedIn}
                     isBurgerClicked={isBurgerClicked}
                     onClickBurger={handleBurgerMenuClick}
                 />
-                <Movies />
+                <Movies
+                    savedMovies={savedMovies}
+                    handleMovieLike={handleMovieLike}
+                    handleMovieDislike={handleMovieDislike}
+                />
                 <Footer />
             </>,
         savedMovies:
             <>
-                <Header 
-                    isLoggedIn={loggedIn}
+                <Header
                     isBurgerClicked={isBurgerClicked}
                     onClickBurger={handleBurgerMenuClick}
                 />
-                <SavedMovies />
+                <SavedMovies
+                    savedMovies={savedMovies}
+                    handleMovieDelete={handleMovieDelete}
+                />
                 <Footer />
             </>,
         profile:
             <>
-                <Header 
-                    isLoggedIn={loggedIn}
+                <Header
                     isBurgerClicked={isBurgerClicked}
                     onClickBurger={handleBurgerMenuClick}
                 />
                 <Profile
                     onSubmit={handleSubmit}
                     onSignout={handleExit}
+                    {...props}
                 />
             </>,
     }[elementType];

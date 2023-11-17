@@ -1,19 +1,61 @@
 import "./SavedMovies.css"
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import {demoSavedMovies} from "../../utils/constants"
-// import Button from "../Button/Button";
+import { useEffect, useState } from "react";
 
-// В этой секции для демонстрации стилей иконки сохраненных фильмов они реализованы как кнопки лайка
+export default function SavedMovies({handleMovieDelete, savedMovies}) {
+    const [noSaves, setNoSaves] = useState(true);
+    const [isShort, setIsShort] = useState(false);
+    const [query, setQuery] = useState("");
+    const [requestedMovies, setRequestedMovies] = useState(savedMovies);
 
-export default function SavedMovies() {
+    function filter(query, movies, isShort) {
+        const queryResult = movies.filter((movie) => {
+            const searchRU = movie.nameRU.toLowerCase().includes(query.toLowerCase());
+            return searchRU;
+        })
+        if (isShort) {
+            setRequestedMovies(queryResult.filter((result) => result.duration <= 40 ));
+        } else
+            setRequestedMovies(queryResult);
+        }
+
+    function goSearch(query) {
+        setQuery(query);
+        filter (query, savedMovies, isShort);
+    }
+
+    function handleShort() {
+        setIsShort(!isShort);
+        filter(query, savedMovies, !isShort);
+    }
+
+    useEffect(() => {
+        if (savedMovies.length === 0) {
+            setNoSaves(true)
+        } else {
+            setNoSaves(false)
+        }
+        filter(query, savedMovies, isShort);
+    // }, [savedMovies])
+    }, [query, savedMovies, isShort])
+
     return (
         <main className="saved-movies">
-            <SearchForm />
-            <MoviesCardList movies={demoSavedMovies} savedMoviesSection={true}/>  
-            {/* <div className="movies__more">
-                <Button buttonType="more" titleButton="Ещё" />
-            </div> */}
+            <SearchForm
+                onSubmit={goSearch}
+                firstSearch={noSaves}
+                isShort={isShort}
+                setQuery={setQuery}
+                handleShort={handleShort}
+            />
+            <MoviesCardList
+                movies={requestedMovies}
+                savedMoviesSection={true}
+                noSaves={noSaves}
+                isNotFound={savedMovies.length !== 0 & requestedMovies.length === 0 ? true : false}
+                handleMovieDelete={handleMovieDelete}
+            />
         </main>
     )
 }

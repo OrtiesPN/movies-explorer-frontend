@@ -30,7 +30,7 @@
     padding: 0;
     list-style: none;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 30px;
 }
 
@@ -132,7 +132,7 @@
 } */
 
 @media screen and (max-width: 370px) {
-    .navigation__list_user_mobile {
+    .navigation__list_user-mobile {
         width: 100%;
     }
 }
