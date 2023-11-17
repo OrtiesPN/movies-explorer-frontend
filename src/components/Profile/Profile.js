@@ -94,7 +94,7 @@ export default function Profile ({onSubmit, onSignout, isOnEdit, setIsOnEdit, is
                     ) : (
                             <div className="profile__buttons">
                                 <span className="profile__allert">{errors.edit_name ? errors.edit_name : errors.edit_email ? errors.edit_email : 
-                                    values.edit_name === currentUser.name || values.edit_email === currentUser.email ? "Имя и e-mail должны отличаться от сохраненных" :
+                                    values.edit_name === currentUser.name && values.edit_email === currentUser.email ? "Введите новое имя или email" :
                                     isFail ? "Что-то пошло не так" : ""}
                                 </span>
                                 <Button
@@ -103,7 +103,7 @@ export default function Profile ({onSubmit, onSignout, isOnEdit, setIsOnEdit, is
                                 isValid={isFormValid}
                                 isFail={isFail}
                                 isSend={isSend}
-                                isSame={values.edit_name === currentUser.name || values.edit_email === currentUser.email ? true : false}
+                                isSame={values.edit_name === currentUser.name && values.edit_email === currentUser.email ? true : false}
                                 onClick={handleSubmit}
                                 />
                                 <Button buttonType={"profile"} titleButton={"Отменить редактирование"} isValid={true} onClick={resetEdit} />
